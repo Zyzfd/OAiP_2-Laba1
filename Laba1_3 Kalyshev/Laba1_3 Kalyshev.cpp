@@ -34,7 +34,7 @@ void merge(int* mass, int start, int end) {
     }
 
     printf("\n");
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 10; i++) {
         printf("%5d", mass[i]);
     }
 }
@@ -59,9 +59,9 @@ void merge_sort(int* mass, int start, int end) {
 
 int main()
 {
-    int mass[] = {10, 0, 52, 4254, 4, 86, 2, 4, 96};
+    int mass[] = {10, 0, 52, 4254, 4, 86, 2, 4, 96, 3};
     
-    merge_sort(mass, 0, 8);
+    merge_sort(mass, 0, 9);
 
     printf("\n");
     for (int i = 0; i < sizeof(mass) / sizeof(int); i++) {

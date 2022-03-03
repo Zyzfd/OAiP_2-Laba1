@@ -12,8 +12,7 @@ void swap(int mass[], int ind1, int ind2) {
 
 void merge(int* mass, int start, int end) {
     int left_iterator, right_iterator, middle;
-    int* mas;
-    mas = (int*)malloc((end - start) * sizeof(int));
+    int* mas = (int*)malloc((end - start) * sizeof(int));
 
     middle = (start + end) / 2;
     left_iterator = start;
@@ -34,9 +33,15 @@ void merge(int* mass, int start, int end) {
         mass[i] = *(mas + i - start);
     }
 
+    printf("\n");
+    for (int i = 0; i < 9; i++) {
+        printf("%5d", mass[i]);
+    }
 }
 
 void merge_sort(int* mass, int start, int end) {
+
+    
     if (start < end) {
         int middle = (start + end) / 2;
 
@@ -44,6 +49,7 @@ void merge_sort(int* mass, int start, int end) {
         merge_sort(mass, middle + 1, end);
 
         merge(mass, start, end);
+    
     }
 }
 
@@ -53,9 +59,11 @@ void merge_sort(int* mass, int start, int end) {
 
 int main()
 {
-    int mass[] = {10, 3, 52, 4254, 4, 86, 2, 4, 96};
+    int mass[] = {10, 0, 52, 4254, 4, 86, 2, 4, 96};
     
     merge_sort(mass, 0, 8);
+
+    printf("\n");
     for (int i = 0; i < sizeof(mass) / sizeof(int); i++) {
         printf("%5d", mass[i]);
     }

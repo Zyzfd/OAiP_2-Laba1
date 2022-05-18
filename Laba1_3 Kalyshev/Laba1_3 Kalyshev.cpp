@@ -2,7 +2,9 @@
 //
 
 #include <stdio.h>
+#include <ctime>
 #include <malloc.h>
+#include <stdlib.h>
 
 void swap(int mass[], int ind1, int ind2) {
     int temp = mass[ind1];
@@ -33,10 +35,10 @@ void merge(int* mass, int start, int end) {
         mass[i] = *(mas + i - start);
     }
 
-    printf("\n");
+    /*printf("\n");
     for (int i = 0; i < 10; i++) {
         printf("%5d", mass[i]);
-    }
+    }*/
 }
 
 void merge_sort(int* mass, int start, int end) {
@@ -59,13 +61,27 @@ void merge_sort(int* mass, int start, int end) {
 
 int main()
 {
-    int mass[] = {10, 0, 52, 4254, 4, 86, 2, 4, 96, 3};
+    /*int mass[] = {10, 0, 52, 4254, 4, 86, 2, 4, 96, 3};
     
-    merge_sort(mass, 0, 9);
+    merge_sort(mass, 0, 9);*/
 
-    printf("\n");
+    for (int kolvo = 0; kolvo < 100000; kolvo += 10000) {
+        int* mass = (int*)malloc(kolvo * sizeof(int));
+
+        for (int i = 0; i < kolvo; i++) {
+            mass[i] = rand();
+        }
+
+        unsigned int start_time = clock();
+        merge_sort(mass, 0, kolvo);
+        unsigned int end_time = clock();
+        unsigned int search_time = end_time - start_time;
+        printf("%d\n", search_time);
+    }
+
+    /*printf("\n");
     for (int i = 0; i < sizeof(mass) / sizeof(int); i++) {
         printf("%5d", mass[i]);
-    }
+    }*/
 
 }

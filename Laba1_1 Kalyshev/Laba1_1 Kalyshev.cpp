@@ -2,6 +2,9 @@
 //
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <ctime>
+#include <malloc.h>
+#include <stdlib.h>
 
 void swap(int mass[], int ind1, int ind2) {
     int temp = mass[ind1];
@@ -9,29 +12,29 @@ void swap(int mass[], int ind1, int ind2) {
     mass[ind2] = temp;
 }
 
-int main()
-{
-    int mass[] = { 8, 42, 5, 2, 0, 234, 897, 1, 8 };
-    bool need = true;
-    while (need) {
-        need = false;
-        for (int i = 0; i < (sizeof(mass) / sizeof(int)); i++) {
-            if (mass[i] < mass[i - 1]) {
-                swap(mass, i, i - 1);
-                printf("\n");
-                for (int i = 0; i < (sizeof(mass) / sizeof(int)); i++) {
-                    printf("%4d", mass[i]);
+int main() {
+    for (int kolvo = 0; kolvo < 100000; kolvo += 10000) {
+        int* mass = (int*)malloc(kolvo * sizeof(int));
+
+        for (int i = 0; i < kolvo; i++) {
+            mass[i] = rand();
+        }
+
+        unsigned int start_time = clock();
+        bool need = true;
+        while (need) {
+            need = false;
+            for (int i = 0; i < (sizeof(mass[i]) * kolvo / sizeof(int)); i++) {
+                if (mass[i] < mass[i - 1]) {
+                    swap(mass, i, i - 1);
+                    need = true;
                 }
-                printf("\n");
-                need = true;
             }
         }
+        unsigned int end_time = clock();
+        unsigned int search_time = end_time - start_time;
+        printf("%d\n", search_time);
     }
-
-    /*for (int i = 0; i < (sizeof(mass) / sizeof(int)); i++) {
-        printf("%3d", mass[i]);
-    }*/
-
 }
 
 
